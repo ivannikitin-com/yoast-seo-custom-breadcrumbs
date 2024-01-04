@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name:       Yoast SEO Custom Breadcrumbs
- * Plugin URI:        
+ * Plugin URI:        https://github.com/ivannikitin-com/yoast-seo-custom-breadcrumbs
  * Description:       Плагин позволяет оформить произвольные хлебные крошки для отдельной страницы/Записи/Товара Wordpress.
  * Version:           1.0
  * Requires at least: 5.2
@@ -10,7 +10,7 @@
  * Author URI:        https://ivannikitin.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Update URI:        
+ * Update URI:        https://github.com/ivannikitin-com/yoast-seo-custom-breadcrumbs/releases/latest
  * Text Domain:       yoast-seo-custom-breadcrumbs
  * Domain Path:       /languages
  * 
@@ -32,6 +32,7 @@ define( 'YSCB', 'yoast-seo-custom-breadcrumbs' );
 
 /* Plugin files */
 require( 'classes/plugin.php' );
+require( 'classes/metabox.php' );
 
 /* Запуск */
 new \YSCB\Plugin(

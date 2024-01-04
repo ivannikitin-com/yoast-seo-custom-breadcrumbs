@@ -55,6 +55,7 @@ class Plugin {
 
         /* Формируем массив крошек */
         if ( $crumbs_menu && $crumbs_menu != $this->metabox->get_default() ) {
+            /* Формируем хлебные крошки */
             $crumbs = array();
             $menu_items = wp_get_nav_menu_items( $crumbs_menu );
             foreach ( $menu_items as $menu_item ) {
@@ -63,6 +64,11 @@ class Plugin {
                     'text'  => $menu_item->title
                 );
             }
+            /* Добавим последний элемент -- ссылку на себя */
+            $post = get_post($post_id);
+            $crumbs[] = array(
+                'text'  => $post->post_title
+            );            
         }
 
         return $crumbs;
