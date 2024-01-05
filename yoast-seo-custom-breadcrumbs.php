@@ -2,11 +2,11 @@
 /*
  * Plugin Name:       Yoast SEO Custom Breadcrumbs
  * Plugin URI:        https://github.com/ivannikitin-com/yoast-seo-custom-breadcrumbs
- * Description:       Плагин позволяет оформить произвольные хлебные крошки для отдельной страницы/Записи/Товара Wordpress.
- * Version:           1.0
+ * Description:       This plugin allows for custom breadcrumbs to be set up for any individual page/post/product in Wordpress.
+ * Version:           1.0.1
  * Requires at least: 5.2
  * Requires PHP:      7.4
- * Author:            Иван Никитин и партнеры
+ * Author:            IvanNikitin and Co
  * Author URI:        https://ivannikitin.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html

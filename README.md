@@ -1,5 +1,7 @@
 # Yoast SEO Custom Breadcrumbs
 
+[English](README_en.md)
+
 Версия 1.0
 
 ![banner](assets/banner-772x250.jpg)
@@ -76,4 +78,4 @@ General Public License version 2 — это свободная лицензия 
 
 Сканируйте этот QR-код любым банковским приложением, укажите любую сумму добровольного пожертвования автору и укажите в назначении платежа _"На кофе автору"_:
 
-<img src="https://ivannikitin.com/wp-content/uploads/2021/09/qr-invoice.png" width="256" alt="Пожертвование на кофе автору">
+<img src="assets/qr-coffee.png" width="256" alt="Пожертвование на кофе автору">

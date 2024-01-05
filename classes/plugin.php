@@ -25,7 +25,7 @@ class Plugin {
      */
     public function __construct( $mainFile ) {
         /* Рабочая папка плагина */
-        $this->folder = dirname( $mainFile );
+        $this->folder = dirname( plugin_basename( $mainFile ) );
         /* Мета-бокс */
         $this->metabox = new Metabox();
 
@@ -39,7 +39,7 @@ class Plugin {
      * Загрузка файлов локализации
      */
     public function load_lang() {
-        load_plugin_textdomain( YSCB, false, $this->folder . '/languages');
+        load_plugin_textdomain( YSCB, false, $this->folder . '/languages/');
     }
 
     /**

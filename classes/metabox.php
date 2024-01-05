@@ -60,7 +60,7 @@ class Metabox
      * @return string
      */
     public function get_default() {
-        return __( 'По умолчанию', YSCB );
+        return __( 'Default', YSCB );
     }
 
     /**
@@ -78,7 +78,7 @@ class Metabox
             array(
                 'id'        => self::META_FIELD,
                 'type'      => 'select',
-                'label'     => __('Выберите хлебные крошки', YSCB ),
+                'label'     => __('Select breadcrumbs', YSCB ),
                 'options'   => $menus,
                 'default'   => $this->get_default()
             )
@@ -93,7 +93,7 @@ class Metabox
         foreach ($this->screen as $single_screen) {
             add_meta_box(
                 self::METABOX_ID,
-                __( 'Хлебные крошки', YSCB ),
+                __( 'Breadcrumbs', YSCB ),
                 array( $this, 'meta_box_callback' ),
                 $single_screen,
                 'normal',
@@ -110,7 +110,7 @@ class Metabox
     public function meta_box_callback( $post )
     {
         wp_nonce_field(self::DATA, self::NONCE);
-        _e ( 'Установка произвольных хлебных крошек для этого элемента', YSCB );
+        _e ( 'Custom breadcrumbs for this post/page/product', YSCB );
         $this->field_generator( $post );
     }
 
