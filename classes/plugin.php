@@ -16,6 +16,10 @@ class Plugin {
      */
     private $metabox;
 
+    /**
+     * Мета для таксономий
+     */
+    private $taxonomyMeta;
 
     /**
      * Конструктор класса
@@ -27,7 +31,9 @@ class Plugin {
         /* Рабочая папка плагина */
         $this->folder = dirname( plugin_basename( $mainFile ) );
         /* Мета-бокс */
-        $this->metabox = new Metabox();
+        $this->metabox = new Metabox( $this );
+        $this->TaxonomyMeta = new TaxonomyMeta( $this );
+
 
         // Хуки
         add_action( 'plugins_loaded', array( $this, 'load_lang' ) );
@@ -41,6 +47,43 @@ class Plugin {
     public function load_lang() {
         load_plugin_textdomain( YSCB, false, $this->folder . '/languages/');
     }
+
+
+    // -----------------------------------------------------------------------------
+
+    /**
+     * Возвращает значение пункта выбора по умолчанию
+     * Нужно для согласованной работы классов Plugin и Metabox
+     * 
+     * @return string
+     */
+    public function get_default() {
+        return __( 'Default', YSCB );
+    }
+
+    /**
+     * Список названий меню для хлебных крошек
+     */
+    private $menus = array();
+
+    /** 
+     * Возвращает массив названий меню для хлебных крошек
+     */
+    public function get_menu_names() {
+        /* Если уже вычисляли, возвращаем вычисленные значения */
+        if ( $this->menus ) {
+            return $this->menus;
+        }
+
+        /* Формируем список меню */
+        $this->menus = array( $this->get_default() );
+        foreach (wp_get_nav_menus() as $menu ){
+            $this->menus[] = $menu->name;
+        }
+
+        return $this->menus;
+    }
+    // -----------------------------------------------------------------------------
 
     /**
      * Обработка массива хлебных крошек
