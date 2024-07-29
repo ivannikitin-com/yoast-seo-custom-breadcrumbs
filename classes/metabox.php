@@ -28,6 +28,11 @@ class Metabox
     const DATA = 'yoast_seo_custom_breadcrumbs_data';
 
     /**
+     * Объект плагина
+     */
+    private $plugin = null; 
+
+    /**
      * Типы записей, для которых устанавливаются хлебные крошки
      */
     private $screen = array(
@@ -44,8 +49,11 @@ class Metabox
     /**
      * Конструктор класса
      */
-    public function __construct()
+    public function __construct( $plugin )
     {
+        // Плагин
+        $this->plugin = $plugin;
+
         // Хуки
         add_action( 'init', array( $this, 'init' ) );
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
@@ -54,33 +62,17 @@ class Metabox
     }
 
     /**
-     * Возвращает значение пункта выбора по умолчанию
-     * Нужно для согласованной работы классов Plugin и Metabox
-     * 
-     * @return string
-     */
-    public function get_default() {
-        return __( 'Default', YSCB );
-    }
-
-    /**
      * Инициализация
      */
     public function init() {
-        /* Список меню */
-        $menus = array( $this->get_default() );
-        foreach (wp_get_nav_menus() as $menu ){
-            $menus[] = $menu->name;
-        }
-
         /* Инициализация описания мета-полей */
         $this->meta_fields = array(
             array(
                 'id'        => self::META_FIELD,
                 'type'      => 'select',
                 'label'     => __('Select breadcrumbs', YSCB ),
-                'options'   => $menus,
-                'default'   => $this->get_default()
+                'options'   => $this->plugin->get_menu_names(), // Список меню
+                'default'   => $this->plugin->get_default()     // Значение по умолчанию
             )
         );
     }

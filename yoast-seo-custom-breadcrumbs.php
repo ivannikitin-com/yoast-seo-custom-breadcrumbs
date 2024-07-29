@@ -33,6 +33,7 @@ define( 'YSCB', 'yoast-seo-custom-breadcrumbs' );
 /* Plugin files */
 require( 'classes/plugin.php' );
 require( 'classes/metabox.php' );
+require( 'classes/taxonomy-meta.php' );
 
 /* Запуск */
 new \YSCB\Plugin(
