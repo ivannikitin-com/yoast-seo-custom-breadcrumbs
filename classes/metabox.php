@@ -76,6 +76,28 @@ class Metabox
             )
         );
     }
+
+    /**
+     * Возвращает выбранное меню для текущей страницы
+     */
+    public function get_current_menu() {
+        $current_obj = $this->plugin->get_current_obj();
+        $this->plugin->log( ['Текущий объект', $current_obj] );
+
+        if ( ! $current_obj ) return null;
+
+        if ($current_obj instanceof \WP_Post) {
+            $menu = get_post_meta($current_obj->ID, self::META_FIELD, true);
+
+            $this->plugin->log( ['Меню', var_export( $menu, true)] );
+            $this->plugin->log( ['Текущее значение мета-поля', $menu] );
+
+            if ($menu) {    
+                return $menu;
+            }
+        }
+        return null;
+    }
     
     /**
      * Добавление мета-бокса к требуемым типам записей
