@@ -56,7 +56,7 @@ class Plugin {
      * Сервисный метод логирования
      */
     public function log( $objs ) {
-        if ( ! WP_DEBUG ) return;
+        if ( ! defined( 'YSCB_DEBUG' ) || ! YSCB_DEBUG ) return;
 
         if ( is_scalar( $objs ) ) {
             $messages = array();
@@ -143,8 +143,12 @@ class Plugin {
 
         // Установленное меню текущей страницы
         $crumbs_menu = $this->metabox->get_current_menu();
+        $current_obj_name = $this->metabox->get_current_obj_name();
+
+        // Если данных нет, читаем объект таксономии
         if (! $crumbs_menu ) {
             $crumbs_menu = $this->TaxonomyMeta->get_current_menu();
+            $current_obj_name = $this->TaxonomyMeta->get_current_obj_name();
         }
         $this->log( ['Выбранное меню', $crumbs_menu] ); 
 
@@ -163,11 +167,11 @@ class Plugin {
                     'text'  => $menu_item->title
                 );
             }
-            /* Добавим последний элемент -- ссылку на себя 
-            $post = get_post($post_id);
+
+            // Последний элемент -- текущая страница
             $crumbs[] = array(
-                'text'  => $post->post_title
-            ); */           
+                'text'  => $current_obj_name
+            );         
         }
 
         return $crumbs;

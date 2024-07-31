@@ -81,6 +81,18 @@ class TaxonomyMeta {
     }
 
     /**
+     * Метод возвращает название текущего объекта для хлебных крошек 
+     */
+    public function get_current_obj_name() {
+        // Если текущий объект не определен, пусто
+        if ( ! $this->plugin->get_current_obj() ) return '';
+
+        return $this->plugin->get_current_obj()->name;
+    }
+
+    /* ------------------------------------------------------------------------------------------------ */
+
+    /**
      * Форма выбора меню хлебных крошек при добавлении нового термина
      */
     public function add_select_menu_form( $taxonomy ) {

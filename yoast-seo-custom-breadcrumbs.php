@@ -3,7 +3,7 @@
  * Plugin Name:       Yoast SEO Custom Breadcrumbs
  * Plugin URI:        https://github.com/ivannikitin-com/yoast-seo-custom-breadcrumbs
  * Description:       This plugin allows for custom breadcrumbs to be set up for any individual page/post/product in Wordpress.
- * Version:           1.0.1
+ * Version:           1.1.0
  * Requires at least: 5.2
  * Requires PHP:      7.4
  * Author:            IvanNikitin and Co
@@ -29,6 +29,7 @@
  */
 defined( 'ABSPATH' ) or die( -1 );
 define( 'YSCB', 'yoast-seo-custom-breadcrumbs' );
+define( 'YSCB_DEBUG', false );
 
 /* Plugin files */
 require( 'classes/plugin.php' );
