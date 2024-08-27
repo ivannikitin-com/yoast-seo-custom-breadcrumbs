@@ -39,6 +39,7 @@ class Metabox
         'post',
         'page',
         'product',
+        'edit-product_cat'
     );
 
     /**
@@ -59,6 +60,8 @@ class Metabox
         add_action( 'add_meta_boxes', array( $this, 'add_meta_boxes' ) );
         add_action( 'admin_footer', array( $this, 'media_fields' ) );
         add_action( 'save_post', array( $this, 'save_fields' ) );
+        add_action('product_cat_edit_form_fields', array( $this, 'add_product_cat_edit_form' ), 10, 1);
+        add_action('edited_product_cat', array( $this, 'save_taxonomy_custom_meta' ), 10, 1);
     }
 
     /**
@@ -270,5 +273,43 @@ class Metabox
                 update_post_meta($post_id, $meta_field['id'], '0');
             }
         }
+    }
+
+
+    /**
+     * Поле выбора хлебных крошек в категориях
+     */
+    public function add_product_cat_edit_form($term) {
+
+    //getting term ID
+    $term_id = $term->term_id;
+
+    // retrieve the existing value(s) for this meta field.
+    $product_cat_breadcrumbs = get_term_meta($term_id, 'product_cat_breadcrumbs', true);
+    $default_value = $this->get_default();
+    if ('' == $product_cat_breadcrumbs) $product_cat_breadcrumbs = $default_value;
+
+    ?>
+    <tr class="form-field">
+        <th scope="row" valign="top"><label for="product_cat_breadcrumbs"><?php _e('Custom breadcrumbs for this category', YSCB); ?></label></th>
+        <td>
+            <select name="product_cat_breadcrumbs" id="product_cat_breadcrumbs">
+                <option value="<?php echo $default_value ?>" <?php if ($product_cat_breadcrumbs == $default_value) echo 'selected' ?>><?php echo $default_value ?></option>
+                <?php foreach (wp_get_nav_menus() as $menu ): ?>
+                    <option value="<?php echo $menu->name ?>" <?php if ($product_cat_breadcrumbs == $menu->name) echo 'selected' ?>> <?php echo $menu->name ?></option>            
+                <?php endforeach ?>
+            </select>
+        </td>
+    </tr>
+    <?php
+    }
+
+
+    /**
+     * Сохраняет хлебные кношки для таксономии категории
+     */
+    public function save_taxonomy_custom_meta($term_id) {
+        $product_cat_breadcrumbs = isset($_POST['product_cat_breadcrumbs']) ? sanitize_text_field($_POST['product_cat_breadcrumbs']) : '';
+        update_term_meta($term_id, 'product_cat_breadcrumbs', $product_cat_breadcrumbs);
     }
 }
