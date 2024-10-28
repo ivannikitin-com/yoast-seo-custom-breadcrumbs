@@ -286,7 +286,7 @@ class Metabox
 
     // retrieve the existing value(s) for this meta field.
     $product_cat_breadcrumbs = get_term_meta($term_id, 'product_cat_breadcrumbs', true);
-    $default_value = $this->get_default();
+    $default_value = $this->plugin->get_default();
     if ('' == $product_cat_breadcrumbs) $product_cat_breadcrumbs = $default_value;
 
     ?>
